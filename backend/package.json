@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Tasker backend environment",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git remote add origin https://github.com/roman-flz/tasker.git"
+  },
+  "keywords": [
+    "task",
+    "productivity",
+    "improvement"
+  ],
+  "author": "Roman F.",
+  "license": "ISC"
+}
