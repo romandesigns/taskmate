@@ -6,8 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "start:frontend": "cd ../frontend && npm run dev",
-    "start:backend": "nodemon server.js",
-    "dev": "npm run start:frontend && npm run start:backend",
+    "start:backend": "nodemon .",
+    "dev": "npm run start:frontend && npm run start:backend"
   },
   "repository": {
     "type": "git",
