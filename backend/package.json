@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "Tasker backend environment",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:frontend": "cd ../frontend && npm run dev",
+    "start:backend": "nodemon server.js",
+    "dev": "npm run start:frontend && npm run start:backend",
   },
   "repository": {
     "type": "git",
-    "url": "git remote add origin https://github.com/roman-flz/tasker.git"
+    "url": "https://github.com/roman-flz/tasker.git"
   },
   "keywords": [
     "task",
@@ -16,5 +19,11 @@
     "improvement"
   ],
   "author": "Roman F.",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
 }
