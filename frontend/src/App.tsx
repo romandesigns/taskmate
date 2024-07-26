@@ -1,26 +1,22 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const getTasks = async (url: string) => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    console.log(json);
-  } catch (error) {
-    console.error(error.message);
-  }
-};
+// Pages
+import Layout from "./pages/Layout";
+import NoPage from "./pages/NoPage";
+import Home from "./pages/Home";
 
 function App() {
-  useEffect(() => {
-    getTasks("/api/tasks");
-  }, []);
-
-  return <></>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
