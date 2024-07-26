@@ -47,7 +47,7 @@ function TaskForm() {
   const handleSumit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post("/api/task/new", payload)
+      .post("/api", payload)
       .then((res) => res.data)
       .then((data) => console.log(data))
       .catch((err) => console.error(err));
