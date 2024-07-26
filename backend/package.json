@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start:frontend": "cd ../frontend && npm run dev",
-    "start:backend": "nodemon .",
+    "start:backend": "nodemon ./**/*.ts",
+    "start:build": "npx tsc",
     "dev": "npm run start:frontend && npm run start:backend"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "nodemon": "^3.1.4"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/node": "^20.14.12",
     "typescript": "^5.5.4"
   }

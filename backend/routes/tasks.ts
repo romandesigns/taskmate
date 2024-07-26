@@ -1,12 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-// Controllers
-const taskController = require("../controllers/tasksControllers.ts");
-
-// Routes
-router.get("/tasks", taskController.getTasks);
-router.get("/task/:id", taskController.getTask);
-router.get("/task/:id/delete", taskController.deleteTask);
+// Usa el controlador en la ruta
+router.get("/tasks", (req, res) => {
+  const tasks = [{ name: "task1" }, { name: "task2" }];
+  return res.status(200).json(tasks);
+});
 
 module.exports = router;
