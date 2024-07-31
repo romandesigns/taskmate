@@ -1,6 +1,7 @@
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
 import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+// Routes
 import taskRoutes from "./routes/tasks";
 
 // Load environment variables
@@ -17,17 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-// Routes
-app.use("/api/tasks", taskRoutes);
-
-// API endpoint
-app.post("/api", (req: Request, res: Response) => {
-  const tasks = [
-    { id: 1, title: "Task 1", description: "Description 1" },
-    { id: 2, title: "Task 2", description: "Description 2" },
-  ];
-  res.json(tasks);
-});
+app.use("/api", taskRoutes);
 
 // Running express app
 app.listen(PORT, () => {
