@@ -21,20 +21,24 @@ import axios from "axios";
 import { useState } from "react";
 import { DateTimePicker } from "../ui/DateTimePicker";
 
-interface TaskFormProps {
+export interface TaskFormProps {
   title: string;
   priority: string;
   description: string;
-  date: Date | undefined;
+  due_date: Date | undefined;
 }
 
-function TaskForm() {
+function TaskForm({
+  setTasks,
+}: {
+  setTasks: (tasks: TaskFormProps[]) => void;
+}) {
   const [date12, setDate12] = useState<Date | undefined>(new Date());
   const [payload, setPayload] = useState<TaskFormProps>({
     title: "",
     priority: "",
     description: "",
-    date: date12,
+    due_date: date12,
   });
 
   const handleSumit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,7 +46,7 @@ function TaskForm() {
     axios
       .post("/api/task/new", payload)
       .then((res) => res.data)
-      .then((data) => console.log(data))
+      .then((data) => setTasks(data))
       .catch((err) => console.error(err));
   };
 

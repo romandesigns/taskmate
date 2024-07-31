@@ -15,13 +15,23 @@ import {
 } from "@radix-ui/react-popover";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaCheck, FaPlay } from "react-icons/fa";
+import { TaskFormProps } from "./TaskForm";
+import classname from "classnames";
+import moment from "moment";
 
-export function TaskCard() {
+export function TaskCard({
+  title,
+  due_date,
+  priority,
+  description,
+  created_at,
+}: TaskFormProps) {
   return (
     <Card className="">
       <CardHeader className="text-left">
         <CardTitle className="text-lg font-bold flex justify-between items-center">
           Fix Home Navigation
+          {title}
           <Popover>
             <PopoverTrigger asChild>
               <Button size="icon" variant={"ghost"}>
@@ -39,23 +49,28 @@ export function TaskCard() {
           </Popover>
         </CardTitle>
         <CardDescription className="text-xs font-medium">
-          12/06/2024 at 11:00AM
+          {moment(created_at).format("MM/DD/YYYY - h:mm A")}
         </CardDescription>
       </CardHeader>
       <CardContent className="text-xs font-medium flex items-center justify-between">
-        <Badge className="text-white bg-red-500 text-xs">Urgent</Badge>
+        <Badge
+          className={classname(`text-white bg-red-500 text-xs`, {
+            "bg-red-500": priority === "urgent",
+            "bg-yellow-500": priority === "medium",
+            "bg-green-500": priority === "low",
+          })}
+        >
+          {priority}
+        </Badge>
         <span className=""></span>
         <span className="text-neutral-500/80">Backlog</span>
       </CardContent>
       <CardContent>
-        <p className="text-xs text-left">
-          Whenever I try the home page navigation on mobile phones, the layout
-          breaks making the entire application look super weird.
-        </p>
+        <p className="text-xs text-left">{description}</p>
       </CardContent>
       <CardFooter className="flex flex-col items-start">
         <p className="text-xs text-yellow-600 font-medium ">
-          Due: 12/08/2024 at 11:00AM
+          Due: {moment(due_date).format("MM/DD/YYYY - h:mm A")}
         </p>
         <div className="mt-6 flex gap-4">
           <Button size="icon">
