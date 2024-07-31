@@ -12,7 +12,23 @@ function Layout() {
               TASKMATE
             </Link>
           </div>
-          <ul>
+          <ul className="flex items-center justify-center gap-6">
+            <li>
+              <Link
+                to="/"
+                className="text-sm underline opacity-75 hover:opacity-100"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/playground"
+                className="text-sm underline opacity-75 hover:opacity-100"
+              >
+                Playground
+              </Link>
+            </li>
             <li>
               <ModeToggle />
             </li>

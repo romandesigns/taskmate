@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -18,16 +17,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { format } from "date-fns";
-import { FaCalendar } from "react-icons/fa6";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 import axios from "axios";
+import { useState } from "react";
+import { DateTimePicker } from "../ui/DateTimePicker";
 
 interface TaskFormProps {
   title: string;
@@ -37,17 +29,18 @@ interface TaskFormProps {
 }
 
 function TaskForm() {
+  const [date12, setDate12] = useState<Date | undefined>(new Date());
   const [payload, setPayload] = useState<TaskFormProps>({
     title: "",
     priority: "",
     description: "",
-    date: new Date(),
+    date: date12,
   });
 
   const handleSumit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post("/api", payload)
+      .post("/api/task/new", payload)
       .then((res) => res.data)
       .then((data) => console.log(data))
       .catch((err) => console.error(err));
@@ -89,33 +82,12 @@ function TaskForm() {
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "justify-start text-left font-normal",
-                    !payload.date && "text-muted-foreground"
-                  )}
-                >
-                  <FaCalendar className="mr-2 h-4 w-4" />
-                  {payload.date ? (
-                    format(payload.date, "PPP")
-                  ) : (
-                    <span>Pick a date</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-full p-0">
-                <Calendar
-                  mode="single"
-                  selected={payload.date}
-                  onSelect={(date) => setPayload({ ...payload, date: date })}
-                  initialFocus
-                  className="w-full p-0"
-                />
-              </PopoverContent>
-            </Popover>
+            <DateTimePicker
+              hourCycle={12}
+              value={date12}
+              onChange={setDate12}
+            />
+
             <Textarea
               placeholder="Type your message here."
               onChange={(e) =>

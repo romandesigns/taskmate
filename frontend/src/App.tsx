@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import NoPage from "./pages/NoPage";
 import Home from "./pages/Home";
+import Playground from "./pages/Playground";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/playground" element={<Playground />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
